@@ -8,4 +8,4 @@ pipelines:
           - gem install bundler
           - bundle install
           - bundle exec spring binstub --all
-          - bundle exec rake db:migrate
+          - rspec
