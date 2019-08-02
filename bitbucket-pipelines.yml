@@ -4,4 +4,4 @@ pipelines:
     - step:
         script:
           - ruby -v
-          - rake -T
+          - bin/rake -T
