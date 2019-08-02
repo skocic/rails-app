@@ -4,4 +4,7 @@ pipelines:
     - step:
         script:
           - ruby -v
-          - bin/rake -T
+          - gem install coffee-rails
+          - gem install bundler
+          - bundle exec spring binstub --all
+          - bundle exec rake db:migrate
