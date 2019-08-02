@@ -10,7 +10,7 @@ pipelines:
           - gem install bundler
           - bundle install --path vendor/bundle
           - bundle exec spring binstub --all
-          - rspec
+          - bundle exec spec
 definitions:
   caches:
     bundler: vendor/bundle
