@@ -6,5 +6,6 @@ pipelines:
           - ruby -v
           - gem install coffee-rails
           - gem install bundler
+          - bundle install
           - bundle exec spring binstub --all
           - bundle exec rake db:migrate
