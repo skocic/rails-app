@@ -126,13 +126,13 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
 WORKDIR /root
 COPY . .
 RUN apt-get update \
- && apt-get install -y --no-install-recommends libsqlite3-dev build-essential
+ && apt-get install -y --no-install-recommends libsqlite3-dev build-essential curl
 RUN gem install nokogiri -v '1.10.3'
 RUN bundle install --path vendor/bundle
 
 EXPOSE 3000
 ENTRYPOINT ["/bin/bash", "-cl"]
 CMD ["bundle exec rails s -b 0.0.0.0"]
-HEALTHCHECK --interval=5s --timeout=10s --start-period=20s --retries=7 \
-  CMD curl -f http://localhost:3000/ || exit 1
+HEALTHCHECK --interval=5s --timeout=90s --start-period=10s --retries=7 \
+  CMD curl -f http://localhost:3000/api/jira/webhook || exit 1
 
