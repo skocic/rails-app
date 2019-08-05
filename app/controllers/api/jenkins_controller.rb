@@ -14,17 +14,15 @@ module Api
     end
 
     def webhook
-      else
-        begin
-          branch = get_branch(params['issue_id'])
-          puts branch
-          response = Bitbucket.trigger_pipeline(branch)
-          render json: response
-        rescue RestClient::BadRequest => e
-          render json: { error: e.message, code: 400 }
-        rescue RestClient::NotFound => e
-          render json: { error: e.message, code: 404 }
-        end
+      begin
+        branch = get_branch(params['issue_id'])
+        puts branch
+        response = Bitbucket.trigger_pipeline(branch)
+        render json: response
+      rescue RestClient::BadRequest => e
+        render json: { error: e.message, code: 400 }
+      rescue RestClient::NotFound => e
+        render json: { error: e.message, code: 404 }
       end
     end
   end
