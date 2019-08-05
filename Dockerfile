@@ -134,5 +134,5 @@ EXPOSE 3000
 ENTRYPOINT ["/bin/bash", "-cl"]
 CMD ["bundle exec rails s -b 0.0.0.0"]
 HEALTHCHECK --interval=5s --timeout=90s --start-period=10s --retries=7 \
-  CMD curl -f http://localhost:3000/api/jira/webhook || exit 1
+  CMD curl -f http://localhost:3000/api/jenkins/webhook?access_token=$ACCESS_TOKEN || exit 1
 

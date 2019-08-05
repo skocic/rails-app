@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
+    namespace :jenkins do
+      get :webhook
+    end
     namespace :jira do
       get :webhook
     end
