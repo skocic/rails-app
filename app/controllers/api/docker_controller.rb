@@ -1,6 +1,6 @@
-require_relative '../../../app/bitbucket/bitbucket'
+require_relative '../../../app/jenkins/jenkins'
 
-module Docker
+module Api
   # Docker controller
   class DockerController < ApplicationController
     include JiraHelper
@@ -18,7 +18,7 @@ module Docker
       begin
         branch = get_branch(params['issue_id'])
         puts branch
-        response = Bitbucket.trigger_pipeline(branch)
+        response = Jenkins.trigger_pipeline(branch)
         render json: response
       rescue RestClient::BadRequest => e
         render json: { error: e.message, code: 400 }
