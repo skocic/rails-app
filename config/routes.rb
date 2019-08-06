@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :docker do
-    get :up
+    get :down
     post :up
   end
 
