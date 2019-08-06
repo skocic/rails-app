@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :docker do
+    get :up
+    post :up
+  end
+
   namespace :api do
     namespace :jenkins do
       get :webhook
