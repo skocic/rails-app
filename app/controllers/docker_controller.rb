@@ -4,6 +4,8 @@ require_relative '../../app/jenkins/jenkins'
 class DockerController < ApplicationController
   include Api::JiraHelper
 
+  rescue_from StandardError, with: :handle_error
+
   before_action do
     if params['access_token'] != ENV['ACCESS_TOKEN']
       render json: { error: 'access_token failure', code: 400 } and return
@@ -20,7 +22,7 @@ class DockerController < ApplicationController
       response = Jenkins.trigger_pipeline(branch)
       render json: response
     rescue RestClient::BadRequest => e
-      render json: { error: e.message, code: 400 }
+      render json: { error: e.message, code: :bad_request }
     rescue RestClient::NotFound => e
       render json: { error: e.message, code: 404 }
     end
@@ -33,9 +35,13 @@ class DockerController < ApplicationController
       Ci.docker_down(branch)
       render json: { status: response }
     rescue RestClient::BadRequest => e
-      render json: { error: e.message, code: 400 }
+      render json: { error: e.message, code: :bad_request }
     rescue RestClient::NotFound => e
       render json: { error: e.message, code: 404 }
     end
+  end
+
+  def handle_error(exception)
+    render json: { message: exception.message }, status: :bad_request and return
   end
 end

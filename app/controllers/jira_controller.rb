@@ -1,4 +1,4 @@
-require_relative '../../../app/bitbucket/bitbucket'
+require_relative '../../../app/bitbucket/rb'
 
 module Api
   # JIRA controller

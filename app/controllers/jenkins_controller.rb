@@ -1,4 +1,4 @@
-require_relative '../../../app/jenkins/jenkins'
+require_relative '../../../app/jenkins/'
 
 module Api
   # JIRA controller

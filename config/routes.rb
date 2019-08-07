@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :webhook do
+    namespace :bitbucket do
+      post :pr_closed
+    end
+
+  end
+
   namespace :docker do
     get :down
     post :up
